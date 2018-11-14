@@ -7,6 +7,7 @@ package senior.citizen.record.system.utils;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,22 +24,22 @@ public class DataTableUtils {
         try {
             Vector column_name = new Vector();
 
-            for (int i = 1; i <= columns; i++) {
+            for (int i = 2; i <= columns; i++) {
                 column_name.addElement(rsmd.getColumnName(i));
             }
             dtm.setColumnIdentifiers(column_name);
 
             while (rs.next()) {
                 Vector data_rows = new Vector();
-                for (int x = 1; x <= columns; x++) {
+                for (int x = 2; x <= columns; x++) {
                     data_rows.addElement(rs.getString(x));
                 }
 
                 dtm.addRow(data_rows);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Registration Error", JOptionPane.ERROR_MESSAGE);
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
         }
 
         return dtm;

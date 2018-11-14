@@ -312,7 +312,7 @@ public class Barangay extends javax.swing.JFrame {
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 760, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\myphoto\\mainbackground.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/mainbackground.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

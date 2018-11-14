@@ -8,12 +8,15 @@ package senior.citizen.record.system.barangay_classify;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.util.Vector;
+import java.sql.SQLException;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import senior.citizen.record.system.db.DatabaseHelper;
 import senior.citizen.record.system.db.SQLConnection;
 import senior.citizen.record.system.utils.DataTableUtils;
+import senior.citizen.record.system.utils.GroupButtonUtils;
 
 /**
  *
@@ -26,6 +29,9 @@ public class SeniorRecords extends javax.swing.JFrame {
     ResultSet rs;
     DefaultTableModel dtm;
     private String brgy;
+    private static final int MIN_AGE = 60;
+
+    private String senior_id;
 
     /**
      * Creates new form SeniorRecords
@@ -42,6 +48,8 @@ public class SeniorRecords extends javax.swing.JFrame {
         int xsize = (int) tk.getScreenSize().getWidth();
         int ysize = (int) tk.getScreenSize().getHeight();
         this.setSize(xsize, ysize);
+        dlgUpdateRecords.setSize(685, 500);
+        dlgUpdateRecords.setLocationRelativeTo(null);
         displayRecords();
 //        JOptionPane.showMessageDialog(this, brgy, "TITLE", JOptionPane.WARNING_MESSAGE);
     }
@@ -55,6 +63,40 @@ public class SeniorRecords extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dlgUpdateRecords = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        txtSeniorID = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtLastName = new javax.swing.JTextField();
+        txtGroupName = new javax.swing.JTextField();
+        txtGroupArea = new javax.swing.JTextField();
+        txtAddress = new javax.swing.JTextField();
+        txtBirthPlace = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jdcBday = new com.toedter.calendar.JDateChooser();
+        jLabel11 = new javax.swing.JLabel();
+        rdoMale = new javax.swing.JRadioButton();
+        rdoFemale = new javax.swing.JRadioButton();
+        jLabel12 = new javax.swing.JLabel();
+        cboStatus = new javax.swing.JComboBox();
+        btnCancel = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        cboBrgy = new javax.swing.JComboBox();
+        jLabel14 = new javax.swing.JLabel();
+        txtAge = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        btnUpdateRecord = new javax.swing.JButton();
+        txtFirstName = new javax.swing.JTextField();
+        txtMiddleName = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        btnGrpGender = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSeniorRecords = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -65,30 +107,265 @@ public class SeniorRecords extends javax.swing.JFrame {
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
 
+        dlgUpdateRecords.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                dlgUpdateRecordsWindowOpened(evt);
+            }
+        });
+
+        jLabel3.setText("Senior Citizen ID");
+
+        txtSeniorID.setEditable(false);
+        txtSeniorID.setEnabled(false);
+
+        jLabel4.setText("First Name");
+
+        jLabel5.setText("Last Name");
+
+        jLabel6.setText("Group Name");
+
+        jLabel7.setText("Group Area");
+
+        jLabel8.setText("Complete Address");
+
+        jLabel9.setText("Birth Date");
+
+        jLabel10.setText("Birth Place");
+
+        jdcBday.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdcBdayPropertyChange(evt);
+            }
+        });
+
+        jLabel11.setText("Gender");
+
+        btnGrpGender.add(rdoMale);
+        rdoMale.setText("Male");
+        rdoMale.setEnabled(false);
+
+        btnGrpGender.add(rdoFemale);
+        rdoFemale.setText("Female");
+        rdoFemale.setEnabled(false);
+        rdoFemale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoFemaleActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Civil Status");
+
+        cboStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Single", "Married", "Separated", "Widowed" }));
+        cboStatus.setSelectedIndex(-1);
+        cboStatus.setEnabled(false);
+
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setText("Barangay Name");
+
+        cboBrgy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Antipolo", "Ariendo", "Bantog", "Calaanan", "Commercial", "Cruz", "Curva", "Digmala", "Caingin", "Labi", "Larcon", "Lusok", "Macabaklay", "Matanggol", "Mantile", "Olibete", "Palomaria", "Peza", "Rizal", "Sampalukan", "San Roque", "Santor", "Sinipit", "Sisilang", "Social", "Togatog", "Tulay na Bato", "Vega" }));
+        cboBrgy.setSelectedIndex(-1);
+        cboBrgy.setEnabled(false);
+
+        jLabel14.setText("Age");
+
+        txtAge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAgeActionPerformed(evt);
+            }
+        });
+        txtAge.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAgeKeyReleased(evt);
+            }
+        });
+
+        jLabel15.setText("Full Name");
+
+        jLabel16.setText("Group Details");
+
+        btnUpdateRecord.setText("Update");
+        btnUpdateRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateRecordActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setText("Middle Name");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnUpdateRecord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAddress)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jdcBday, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBirthPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtAge))))
+                    .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(16, 16, 16))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtSeniorID, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                .addComponent(txtGroupName))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtGroupArea, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel17)
+                                    .addComponent(txtMiddleName, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(18, 18, 18)
+                        .addComponent(cboBrgy, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoMale)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoFemale)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(cboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtSeniorID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15)
+                            .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMiddleName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel17))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtGroupName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtGroupArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel12))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(cboBrgy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)
+                            .addComponent(rdoMale)
+                            .addComponent(rdoFemale)
+                            .addComponent(cboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(6, 6, 6))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel10)
+                                .addComponent(txtBirthPlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel14)
+                                .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jdcBday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnUpdateRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+        );
+
+        javax.swing.GroupLayout dlgUpdateRecordsLayout = new javax.swing.GroupLayout(dlgUpdateRecords.getContentPane());
+        dlgUpdateRecords.getContentPane().setLayout(dlgUpdateRecordsLayout);
+        dlgUpdateRecordsLayout.setHorizontalGroup(
+            dlgUpdateRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlgUpdateRecordsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        dlgUpdateRecordsLayout.setVerticalGroup(
+            dlgUpdateRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgUpdateRecordsLayout.createSequentialGroup()
+                .addContainerGap(154, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
-        tblSeniorRecords.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        tblSeniorRecords.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSeniorRecordsMouseClicked(evt);
             }
-        ));
+        });
         jScrollPane1.setViewportView(tblSeniorRecords);
 
         jLabel1.setText("Search");
 
         jLabel2.setText("Search by:");
 
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -154,12 +431,147 @@ public class SeniorRecords extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-    // TODO add your handling code here:
+        // TODO add your handling code here:
+        if (senior_id != null) {
+            int ans = JOptionPane.showOptionDialog(null, "Are you sure want to delete this senior record?", null,
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if (ans == 0) {
+                JOptionPane.showMessageDialog(null, "DELETED");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a record",
+                    "Message", JOptionPane.WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        if (senior_id != null) {
+            dlgUpdateRecords.setVisible(true);
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void tblSeniorRecordsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSeniorRecordsMouseClicked
+        // TODO add your handling code here:
+        try {
+            int selectedRow = tblSeniorRecords.getSelectedRow();
+            String row_click = (tblSeniorRecords.getModel().getValueAt(selectedRow, 0).toString());
+
+            rs = databaseHelper.getAllDataOf("tblseniorrecords", "`Senior Citizen ID`", row_click);
+
+            if (rs.next()) {
+                System.out.println("ID: " + rs.getString("Senior Citizen ID"));
+                senior_id = rs.getString("Senior Citizen ID");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_tblSeniorRecordsMouseClicked
+
+    private void jdcBdayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcBdayPropertyChange
+        Calendar maxCalendar = Calendar.getInstance();
+        maxCalendar.set(Calendar.YEAR, maxCalendar.get(Calendar.YEAR) - MIN_AGE);
+        jdcBday.setDate(maxCalendar.getTime());
+    }//GEN-LAST:event_jdcBdayPropertyChange
+
+    private void rdoFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoFemaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoFemaleActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        dlgUpdateRecords.dispose();
+        clearFields();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtAgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAgeActionPerformed
+
+    private void txtAgeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAgeKeyReleased
+        // TODO add your handling code here:
+        int x;
+        try {
+            x = Integer.parseInt(txtAge.getText());
+        } catch (NumberFormatException nfe) {
+            txtAge.setText("");
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }//GEN-LAST:event_txtAgeKeyReleased
+
+    private void btnUpdateRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateRecordActionPerformed
+        String address = txtAddress.getText();
+        String birthPlace = txtBirthPlace.getText();
+        String birthdate = ((JTextField) jdcBday.getDateEditor().getUiComponent()).getText();
+        String firstName = txtFirstName.getText();
+        String groupArea = txtGroupArea.getText();
+        String groupName = txtGroupName.getText();
+        String lastName = txtLastName.getText();
+        String middleName = txtMiddleName.getText();
+//        String seniorID = txtSeniorID.getText();
+//        String gender = GroupButtonUtils.getSelectedButtonText(btnGrpGender);
+        String age = txtAge.getText();
+
+        try {
+            if (address.isEmpty() || birthPlace.isEmpty() || birthdate.isEmpty()
+                    || firstName.isEmpty() || lastName.isEmpty() || groupName.isEmpty()
+                    || groupArea.isEmpty() || age.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "All fields are required",
+                        "Update Error", JOptionPane.ERROR_MESSAGE);
+            } else if (Integer.parseInt(age) < 65) {
+                JOptionPane.showMessageDialog(null, "Entry is not eligible. Age must be atleast "
+                        + "60 years old.",
+                        "Update Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                databaseHelper.updateData("tblseniorrecords", "`First Name`", firstName, "`Senior Citizen ID`", senior_id);
+                databaseHelper.updateData("tblseniorrecords", "`Middle Name`", middleName, "`Senior Citizen ID`", senior_id);
+                databaseHelper.updateData("tblseniorrecords", "`Last Name`", lastName, "`Senior Citizen ID`", senior_id);
+                databaseHelper.updateData("tblseniorrecords", "`Group Name`", groupName, "`Senior Citizen ID`", senior_id);
+                databaseHelper.updateData("tblseniorrecords", "`Group Area`", groupArea, "`Senior Citizen ID`", senior_id);
+                databaseHelper.updateData("tblseniorrecords", "`Birth Date`", birthdate, "`Senior Citizen ID`", senior_id);
+                databaseHelper.updateData("tblseniorrecords", "`Birth Place`", birthPlace, "`Senior Citizen ID`", senior_id);
+                databaseHelper.updateData("tblseniorrecords", "Age", age, "`Senior Citizen ID`", senior_id);
+                JOptionPane.showMessageDialog(null, "New senior record has been successfully updated");
+                dlgUpdateRecords.dispose();
+                displayRecords();
+                clearFields();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Update Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnUpdateRecordActionPerformed
+
+    private void dlgUpdateRecordsWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dlgUpdateRecordsWindowOpened
+        // TODO add your handling code here:
+        try {
+            rs = databaseHelper.getAllDataOf("tblseniorrecords", "`Senior Citizen ID`", senior_id);
+
+            if (rs.next()) {
+                txtSeniorID.setText(rs.getString(2));
+                txtLastName.setText(rs.getString(5));
+                txtMiddleName.setText(rs.getString(4));
+                txtFirstName.setText(rs.getString(3));
+                txtAddress.setText(rs.getString(9));
+                txtAge.setText(rs.getString(12));
+                txtBirthPlace.setText(rs.getString(11));
+                txtGroupArea.setText(rs.getString(7));
+                txtGroupName.setText(rs.getString(6));
+                ((JTextField) jdcBday.getDateEditor().getUiComponent()).setText(rs.getString(10));
+                cboBrgy.setSelectedItem(rs.getString(8));
+                cboStatus.setSelectedItem(rs.getString(14));
+                String gender = rs.getString("Gender");
+                if (gender.equals("Male")){
+                    rdoMale.setSelected(true);
+                } else {
+                    rdoFemale.setSelected(true);
+                }
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_dlgUpdateRecordsWindowOpened
 
     private void displayRecords() {
         tblSeniorRecords.removeAll();
@@ -174,9 +586,25 @@ public class SeniorRecords extends javax.swing.JFrame {
             tblSeniorRecords.setModel(dtm);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Registration Error", JOptionPane.ERROR_MESSAGE);
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
         }
 
+    }
+
+    private void clearFields() {
+        txtSeniorID.setText("");
+        txtLastName.setText("");
+        txtMiddleName.setText("");
+        txtFirstName.setText("");
+        txtAddress.setText("");
+        txtAge.setText("");
+        txtBirthPlace.setText("");
+        txtGroupArea.setText("");
+        txtGroupName.setText("");
+        ((JTextField) jdcBday.getDateEditor().getUiComponent()).setText("");
+        cboBrgy.setSelectedIndex(-1);
+        cboStatus.setSelectedIndex(-1);
+        btnGrpGender.clearSelection();
     }
 
     /**
@@ -215,14 +643,48 @@ public class SeniorRecords extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
+    private javax.swing.ButtonGroup btnGrpGender;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnUpdateRecord;
+    private javax.swing.JComboBox cboBrgy;
     private javax.swing.JComboBox cboSearchBy;
+    private javax.swing.JComboBox cboStatus;
+    private javax.swing.JDialog dlgUpdateRecords;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser jdcBday;
+    private javax.swing.JRadioButton rdoFemale;
+    private javax.swing.JRadioButton rdoMale;
     private javax.swing.JTable tblSeniorRecords;
+    private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtAge;
+    private javax.swing.JTextField txtBirthPlace;
+    private javax.swing.JTextField txtFirstName;
+    private javax.swing.JTextField txtGroupArea;
+    private javax.swing.JTextField txtGroupName;
+    private javax.swing.JTextField txtLastName;
+    private javax.swing.JTextField txtMiddleName;
     private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextField txtSeniorID;
     // End of variables declaration//GEN-END:variables
 }

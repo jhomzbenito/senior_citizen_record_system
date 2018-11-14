@@ -56,7 +56,7 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             System.out.print(e.getMessage());
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Registration Error", JOptionPane.ERROR_MESSAGE);
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -69,7 +69,7 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Registration Error", JOptionPane.ERROR_MESSAGE);
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
         }
         return rs;
     }
@@ -79,12 +79,44 @@ public class DatabaseHelper {
             String sql = "SELECT * FROM " + tableName + " WHERE " + columnName + " = '" + value + "';";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            rsmd = rs.getMetaData();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Registration Error", JOptionPane.ERROR_MESSAGE);
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return rs;
+    }
+    
+    public ResultSet searchData(String tableName, String columnName, String searchValue) {
+        try {
+            String sql = "SELECT * FROM " + tableName + " WHERE " + columnName + " LIKE % ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, searchValue);
+            rs = ps.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return rs;
+    }
+    
+    public ResultSet searchDataOf(String tableName, String whereColumn, 
+            String whereArgs, String columnName, String searchValue) {
+        try {
+            String sql = "SELECT * FROM " + tableName + " WHERE " + whereColumn +
+                    " = ? AND "+ columnName + " LIKE % ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, whereArgs);
+            ps.setString(2, searchValue);
+            rs = ps.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
         }
         return rs;
     }
@@ -100,7 +132,7 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Registration Error", JOptionPane.ERROR_MESSAGE);
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -113,7 +145,7 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Registration Error", JOptionPane.ERROR_MESSAGE);
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package senior.citizen.record.system.pojo;
 
 /**
@@ -16,14 +15,18 @@ public class SeniorCitizen {
     private String firstName;
     private String middleName;
     private String lastName;
+    private String groupName;
+    private String groupArea;
+    private String barangay;
+    private String address;
     private String birthdate;
     private String birthplace;
     private int age;
     private String gender;
-    private String address;
     private String civilStatus;
-    
-    public SeniorCitizen() {
+
+    public SeniorCitizen(String seniorID) {
+        this.seniorID = seniorID;
     }
 
     public String getSeniorID() {
@@ -58,6 +61,38 @@ public class SeniorCitizen {
         this.lastName = lastName;
     }
 
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public String getGroupArea() {
+        return groupArea;
+    }
+
+    public void setGroupArea(String groupArea) {
+        this.groupArea = groupArea;
+    }
+
+    public String getBarangay() {
+        return barangay;
+    }
+
+    public void setBarangay(String barangay) {
+        this.barangay = barangay;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getBirthdate() {
         return birthdate;
     }
@@ -90,14 +125,6 @@ public class SeniorCitizen {
         this.gender = gender;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getCivilStatus() {
         return civilStatus;
     }
@@ -105,5 +132,6 @@ public class SeniorCitizen {
     public void setCivilStatus(String civilStatus) {
         this.civilStatus = civilStatus;
     }
+
     
 }

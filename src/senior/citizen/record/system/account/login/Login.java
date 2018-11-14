@@ -23,6 +23,7 @@ public class Login extends javax.swing.JFrame {
     DatabaseHelper databaseHelper;
     ResultSetMetaData rsmd;
     ResultSet rs;
+    public static String login_user;
 
     /**
      * Creates new form Login
@@ -54,7 +55,6 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnLogin.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\myphoto\\BUTTONLOGIN.jpg")); // NOI18N
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -87,7 +87,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Username");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 210, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\myphoto\\login.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/account/login/login_background.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 270));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -112,12 +112,19 @@ public class Login extends javax.swing.JFrame {
                 rowCount++;
                 String username = rs.getString("Username");
                 String password = rs.getString("Password");
-                if (username.equals(txtUsername.getText()) && password.equals(txtPassword.getText())) {
-                    JOptionPane.showMessageDialog(null, "Login successful!");
-                    this.dispose();
-                    new Main().setVisible(true);
-                } else if (username.equals(txtUsername.getText()) && !password.equals(txtPassword.getText())) {
-                    JOptionPane.showMessageDialog(null, "Incorrect password!", "Login Error", JOptionPane.WARNING_MESSAGE);
+                String status = rs.getString("Status");
+                if (status.equals("ACTIVE")) {
+                    if (username.equals(txtUsername.getText()) && password.equals(txtPassword.getText())) {
+                        login_user = txtUsername.getText();
+                        JOptionPane.showMessageDialog(null, "Login successful!");
+                        this.dispose();
+                        new Main().setVisible(true);
+                    } else if (username.equals(txtUsername.getText()) && !password.equals(txtPassword.getText())) {
+                        JOptionPane.showMessageDialog(null, "Incorrect password!", "Login Error", JOptionPane.WARNING_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sorry! Your account has"
+                            + " been disabled by the Admin.", "Login Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
             if (rowCount == 0) {
@@ -130,7 +137,7 @@ public class Login extends javax.swing.JFrame {
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { 
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnLoginActionPerformed(null);
         }
     }//GEN-LAST:event_txtPasswordKeyPressed

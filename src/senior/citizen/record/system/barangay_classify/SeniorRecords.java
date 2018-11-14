@@ -3,11 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package senior.citizen.record.system.barangay_classify;
 
-import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import senior.citizen.record.system.db.DatabaseHelper;
+import senior.citizen.record.system.db.SQLConnection;
+import senior.citizen.record.system.utils.DataTableUtils;
 
 /**
  *
@@ -15,7 +21,12 @@ import javax.swing.JOptionPane;
  */
 public class SeniorRecords extends javax.swing.JFrame {
 
+    DatabaseHelper databaseHelper;
+    ResultSetMetaData rsmd;
+    ResultSet rs;
+    DefaultTableModel dtm;
     private String brgy;
+
     /**
      * Creates new form SeniorRecords
      */
@@ -26,11 +37,14 @@ public class SeniorRecords extends javax.swing.JFrame {
     public SeniorRecords(String brgy) {
         initComponents();
         this.brgy = brgy;
-        JOptionPane.showMessageDialog(this, brgy, "TITLE", JOptionPane.WARNING_MESSAGE);
+        databaseHelper = new DatabaseHelper(SQLConnection.connectToDatabase());
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xsize = (int) tk.getScreenSize().getWidth();
+        int ysize = (int) tk.getScreenSize().getHeight();
+        this.setSize(xsize, ysize);
+        displayRecords();
+//        JOptionPane.showMessageDialog(this, brgy, "TITLE", JOptionPane.WARNING_MESSAGE);
     }
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,6 +61,9 @@ public class SeniorRecords extends javax.swing.JFrame {
         txtSearch = new javax.swing.JTextField();
         cboSearchBy = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -71,6 +88,24 @@ public class SeniorRecords extends javax.swing.JFrame {
 
         jLabel2.setText("Search by:");
 
+        jPanel1.setLayout(new java.awt.GridLayout());
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnUpdate);
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDelete);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,22 +113,25 @@ public class SeniorRecords extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cboSearchBy, javax.swing.GroupLayout.Alignment.TRAILING, 0, 124, Short.MAX_VALUE)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cboSearchBy, javax.swing.GroupLayout.Alignment.TRAILING, 0, 124, Short.MAX_VALUE)
+                                    .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboSearchBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -102,8 +140,9 @@ public class SeniorRecords extends javax.swing.JFrame {
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -113,6 +152,32 @@ public class SeniorRecords extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Barangay().setVisible(true);
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+    // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void displayRecords() {
+        tblSeniorRecords.removeAll();
+        try {
+            rs = databaseHelper.getAllDataOf("tblseniorrecords", "Barangay", brgy);
+            rsmd = rs.getMetaData();
+
+            int columns = rsmd.getColumnCount();
+
+            dtm = DataTableUtils.populateTable(columns, rsmd, rs);
+
+            tblSeniorRecords.setModel(dtm);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Registration Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -150,9 +215,12 @@ public class SeniorRecords extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox cboSearchBy;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblSeniorRecords;
     private javax.swing.JTextField txtSearch;

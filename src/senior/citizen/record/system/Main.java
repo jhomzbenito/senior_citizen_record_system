@@ -6,8 +6,10 @@
 
 package senior.citizen.record.system;
 
+import java.awt.Toolkit;
 import senior.citizen.record.system.account.login.Login;
 import senior.citizen.record.system.account.register.Register;
+import senior.citizen.record.system.barangay_classify.Barangay;
 import senior.citizen.record.system.db.DatabaseHelper;
 import senior.citizen.record.system.db.SQLConnection;
 
@@ -25,6 +27,11 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         databaseHelper = new DatabaseHelper(SQLConnection.connectToDatabase());
+//        Toolkit tk = Toolkit.getDefaultToolkit();
+//        int xsize = (int) tk.getScreenSize().getWidth();
+//        int ysize = (int) tk.getScreenSize().getHeight();
+//        this.setSize(xsize, ysize);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -37,10 +44,13 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton3 = new javax.swing.JButton();
-        btnRegister = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         btnPayment = new javax.swing.JButton();
         btnBarangay = new javax.swing.JButton();
         btnReports = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jButton3.setText("jButton3");
 
@@ -51,49 +61,61 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnRegister.setText("Register");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
-            }
-        });
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnPayment.setText("Payment");
+        btnPayment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/finalpayment.png"))); // NOI18N
         btnPayment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPaymentActionPerformed(evt);
             }
         });
+        jPanel1.add(btnPayment, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, 170, 170));
 
-        btnBarangay.setText("Barangay");
+        btnBarangay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/finalbarangay.png"))); // NOI18N
+        btnBarangay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBarangayActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBarangay, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, 180, 170));
 
-        btnReports.setText("Reports");
+        btnReports.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/finalreports.png"))); // NOI18N
+        btnReports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportsActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnReports, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 260, 180, 170));
+
+        btnRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/finalregister.png"))); // NOI18N
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 170, 170));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/finalexit.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 470, 170, 170));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\myphoto\\mainbackground.png")); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 730));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBarangay, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBarangay, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(137, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -113,6 +135,20 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         databaseHelper.insertData("tblbarangay", "Ariendo");
     }//GEN-LAST:event_btnPaymentActionPerformed
+
+    private void btnBarangayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangayActionPerformed
+        // TODO add your handling code here:
+        new Barangay().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBarangayActionPerformed
+
+    private void btnReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportsActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +190,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnPayment;
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnReports;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

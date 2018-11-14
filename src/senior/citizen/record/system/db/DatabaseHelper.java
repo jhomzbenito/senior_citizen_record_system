@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -54,6 +55,8 @@ public class DatabaseHelper {
 
         } catch (SQLException e) {
             System.out.print(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Registration Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -65,6 +68,8 @@ public class DatabaseHelper {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Registration Error", JOptionPane.ERROR_MESSAGE);
         }
         return rs;
     }
@@ -78,6 +83,8 @@ public class DatabaseHelper {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Registration Error", JOptionPane.ERROR_MESSAGE);
         }
         return rs;
     }
@@ -92,6 +99,8 @@ public class DatabaseHelper {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Registration Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -103,6 +112,8 @@ public class DatabaseHelper {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Registration Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

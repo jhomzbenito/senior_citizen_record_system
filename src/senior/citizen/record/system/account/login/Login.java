@@ -52,9 +52,11 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -86,8 +88,6 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setText("Username");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 210, -1));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/account/login/login_background.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 270));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

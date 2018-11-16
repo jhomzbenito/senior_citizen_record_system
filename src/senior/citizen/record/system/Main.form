@@ -118,7 +118,7 @@
         <Component class="javax.swing.JButton" name="btnPayment">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/senior/citizen/record/system/finalpayment.png"/>
+              <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\finalpayment.png"/>
             </Property>
           </Properties>
           <Events>
@@ -133,7 +133,7 @@
         <Component class="javax.swing.JButton" name="btnBarangay">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/senior/citizen/record/system/finalbarangay.png"/>
+              <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\finalbarangay.png"/>
             </Property>
           </Properties>
           <Events>
@@ -148,7 +148,7 @@
         <Component class="javax.swing.JButton" name="btnRegister">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/senior/citizen/record/system/finalregister.png"/>
+              <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\finalregister.png"/>
             </Property>
           </Properties>
           <Events>
@@ -163,7 +163,7 @@
         <Component class="javax.swing.JButton" name="btnReports">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/senior/citizen/record/system/finalreports.png"/>
+              <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\finalreports.png"/>
             </Property>
           </Properties>
           <Events>
@@ -178,7 +178,7 @@
         <Component class="javax.swing.JButton" name="btnExit">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/senior/citizen/record/system/finalexit.png"/>
+              <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\finalexit.png"/>
             </Property>
           </Properties>
           <Events>
@@ -193,7 +193,7 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/senior/citizen/record/system/mainbackground.png"/>
+              <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\mainbackground.png"/>
             </Property>
           </Properties>
           <Constraints>

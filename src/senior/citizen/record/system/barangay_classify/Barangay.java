@@ -87,7 +87,7 @@ public class Barangay extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridLayout(4, 7, 3, 3));
 
-        btnAntipolo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_antipolo.png"))); // NOI18N
+        btnAntipolo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_antipolo.png")); // NOI18N
         btnAntipolo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAntipoloActionPerformed(evt);
@@ -95,7 +95,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnAntipolo);
 
-        btnAriendo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Ariendo.png"))); // NOI18N
+        btnAriendo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Ariendo.png")); // NOI18N
         btnAriendo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAriendoActionPerformed(evt);
@@ -103,7 +103,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnAriendo);
 
-        btnBantog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Bantog.png"))); // NOI18N
+        btnBantog.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Bantog.png")); // NOI18N
         btnBantog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBantogActionPerformed(evt);
@@ -111,7 +111,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnBantog);
 
-        btnCalaanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Calaanan.png"))); // NOI18N
+        btnCalaanan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Calaanan.png")); // NOI18N
         btnCalaanan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCalaananActionPerformed(evt);
@@ -119,7 +119,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnCalaanan);
 
-        btnCruz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_cruz.png"))); // NOI18N
+        btnCruz.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_cruz.png")); // NOI18N
         btnCruz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCruzActionPerformed(evt);
@@ -127,7 +127,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnCruz);
 
-        btnCurva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Curva.png"))); // NOI18N
+        btnCurva.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Curva.png")); // NOI18N
         btnCurva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCurvaActionPerformed(evt);
@@ -135,7 +135,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnCurva);
 
-        btnDigmala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Digmala.png"))); // NOI18N
+        btnDigmala.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Digmala.png")); // NOI18N
         btnDigmala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDigmalaActionPerformed(evt);
@@ -143,7 +143,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnDigmala);
 
-        btnCaingin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Caingin.png"))); // NOI18N
+        btnCaingin.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Caingin.png")); // NOI18N
         btnCaingin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCainginActionPerformed(evt);
@@ -151,7 +151,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnCaingin);
 
-        btnLabi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Labi.jpg"))); // NOI18N
+        btnLabi.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Labi.jpg")); // NOI18N
         btnLabi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLabiActionPerformed(evt);
@@ -159,7 +159,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnLabi);
 
-        btnLarcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Larcon.jpg"))); // NOI18N
+        btnLarcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Larcon.jpg")); // NOI18N
         btnLarcon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLarconActionPerformed(evt);
@@ -167,7 +167,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnLarcon);
 
-        btnLusok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Lusok.png"))); // NOI18N
+        btnLusok.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Lusok.png")); // NOI18N
         btnLusok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLusokActionPerformed(evt);
@@ -175,7 +175,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnLusok);
 
-        btnMacabaklay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Macabaklay.png"))); // NOI18N
+        btnMacabaklay.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Macabaklay.png")); // NOI18N
         btnMacabaklay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMacabaklayActionPerformed(evt);
@@ -183,7 +183,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnMacabaklay);
 
-        btnMatanggol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Matanggol.png"))); // NOI18N
+        btnMatanggol.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Matanggol.png")); // NOI18N
         btnMatanggol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMatanggolActionPerformed(evt);
@@ -191,7 +191,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnMatanggol);
 
-        btnMantile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Mantile.png"))); // NOI18N
+        btnMantile.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Mantile.png")); // NOI18N
         btnMantile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMantileActionPerformed(evt);
@@ -199,7 +199,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnMantile);
 
-        btnOlibete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Olibete.png"))); // NOI18N
+        btnOlibete.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Olibete.png")); // NOI18N
         btnOlibete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOlibeteActionPerformed(evt);
@@ -207,7 +207,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnOlibete);
 
-        btnPalomaria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Palomaria.png"))); // NOI18N
+        btnPalomaria.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Palomaria.png")); // NOI18N
         btnPalomaria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPalomariaActionPerformed(evt);
@@ -215,7 +215,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnPalomaria);
 
-        btnPesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Pesa.png"))); // NOI18N
+        btnPesa.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Pesa.png")); // NOI18N
         btnPesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesaActionPerformed(evt);
@@ -223,7 +223,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnPesa);
 
-        btnRizal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Rizal.png"))); // NOI18N
+        btnRizal.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Rizal.png")); // NOI18N
         btnRizal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRizalActionPerformed(evt);
@@ -231,7 +231,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnRizal);
 
-        btnSampalukan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Sampalukan.png"))); // NOI18N
+        btnSampalukan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Sampalukan.png")); // NOI18N
         btnSampalukan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSampalukanActionPerformed(evt);
@@ -239,7 +239,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnSampalukan);
 
-        btnSanRoque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_San Roque.png"))); // NOI18N
+        btnSanRoque.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_San Roque.png")); // NOI18N
         btnSanRoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSanRoqueActionPerformed(evt);
@@ -247,7 +247,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnSanRoque);
 
-        btnSantor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Santor.png"))); // NOI18N
+        btnSantor.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Santor.png")); // NOI18N
         btnSantor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSantorActionPerformed(evt);
@@ -255,7 +255,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnSantor);
 
-        btnSinipit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Sinipit.png"))); // NOI18N
+        btnSinipit.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Sinipit.png")); // NOI18N
         btnSinipit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSinipitActionPerformed(evt);
@@ -263,7 +263,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnSinipit);
 
-        btnSisilang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Sisilang.png"))); // NOI18N
+        btnSisilang.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Sisilang.png")); // NOI18N
         btnSisilang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSisilangActionPerformed(evt);
@@ -271,7 +271,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnSisilang);
 
-        btnSocial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Social.png"))); // NOI18N
+        btnSocial.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Social.png")); // NOI18N
         btnSocial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSocialActionPerformed(evt);
@@ -279,7 +279,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnSocial);
 
-        btnTogatog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Togatog.png"))); // NOI18N
+        btnTogatog.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Togatog.png")); // NOI18N
         btnTogatog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTogatogActionPerformed(evt);
@@ -287,7 +287,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnTogatog);
 
-        btnTulaynaBato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Tulay na bato.png"))); // NOI18N
+        btnTulaynaBato.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Tulay na bato.png")); // NOI18N
         btnTulaynaBato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTulaynaBatoActionPerformed(evt);
@@ -295,7 +295,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnTulaynaBato);
 
-        btnCommercial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Commercial.png"))); // NOI18N
+        btnCommercial.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Commercial.png")); // NOI18N
         btnCommercial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCommercialActionPerformed(evt);
@@ -303,7 +303,7 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnCommercial);
 
-        btnVega.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/btn_Vega.png"))); // NOI18N
+        btnVega.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Vega.png")); // NOI18N
         btnVega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVegaActionPerformed(evt);
@@ -313,7 +313,7 @@ public class Barangay extends javax.swing.JFrame {
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 760, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/barangay_classify/mainbackground.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\mainbackground.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

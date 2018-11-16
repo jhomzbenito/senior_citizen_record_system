@@ -12,6 +12,7 @@ import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import senior.citizen.record.system.Main;
+import senior.citizen.record.system.account.login.Login;
 import senior.citizen.record.system.db.DatabaseHelper;
 import senior.citizen.record.system.db.SQLConnection;
 import senior.citizen.record.system.utils.GroupButtonUtils;
@@ -27,6 +28,7 @@ public class Register extends javax.swing.JFrame {
     ResultSet rs;
 
     private static final int MAX_AGE = 60;
+    private String currentDate;
 
     /**
      * Creates new form Register
@@ -40,6 +42,8 @@ public class Register extends javax.swing.JFrame {
         Calendar maxCalendar = Calendar.getInstance();
         maxCalendar.set(Calendar.YEAR, maxCalendar.get(Calendar.YEAR) - MAX_AGE);
         jdcBday.setMaxSelectableDate(maxCalendar.getTime());
+        
+        currentDate = databaseHelper.getCurrentDate();
     }
 
     /**
@@ -88,6 +92,9 @@ public class Register extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -374,6 +381,7 @@ public class Register extends javax.swing.JFrame {
                 databaseHelper.insertData("tblseniorrecords", seniorID, firstName,
                         middleName, lastName, groupName, groupArea, brgy, address,
                         birthdate, birthPlace, age, gender, status);
+                databaseHelper.insertData("tblseniorlogs", seniorID, currentDate, Login.login_user);
                 JOptionPane.showMessageDialog(null, "New senior record has been successfully registered");
                 clearFields();
             }
@@ -399,6 +407,15 @@ public class Register extends javax.swing.JFrame {
             Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_txtAgeKeyReleased
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if (Login.login_user == null) {
+            System.out.println("Hello");
+            this.dispose();
+            new Login().setVisible(true);
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     private void clearFields() {
         txtSeniorID.setText("");

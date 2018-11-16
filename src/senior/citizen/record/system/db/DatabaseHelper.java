@@ -76,8 +76,9 @@ public class DatabaseHelper {
 
     public ResultSet getAllDataOf(String tableName, String columnName, String value) {
         try {
-            String sql = "SELECT * FROM " + tableName + " WHERE " + columnName + " = '" + value + "';";
+            String sql = "SELECT * FROM " + tableName + " WHERE " + columnName + " = ?";
             ps = conn.prepareStatement(sql);
+            ps.setString(1, value);
             rs = ps.executeQuery();
 
         } catch (SQLException e) {
@@ -147,5 +148,43 @@ public class DatabaseHelper {
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     "Database Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public String getCurrentDate(){
+        String currentDate = null;
+        try {
+            String sql = "SELECT DATE_FORMAT(CURRENT_DATE, '%b %d, %Y') AS `Current Date`";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                currentDate = rs.getString("Current Date");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return currentDate;
+    }
+    
+    public String getCurrentTimeStamp(){
+        String currentTimeStamp = null;
+        try {
+            String sql = "SELECT CURRENT_TIMESTAMP AS `Current Time Stamp`";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                currentTimeStamp = rs.getString("Current Time Stamp");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return currentTimeStamp;
     }
 }

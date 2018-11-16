@@ -23,7 +23,8 @@ public class Login extends javax.swing.JFrame {
     DatabaseHelper databaseHelper;
     ResultSetMetaData rsmd;
     ResultSet rs;
-    public static String login_user;
+    public static String login_user = null;
+    private String currentTimeStamp;
 
     /**
      * Creates new form Login
@@ -32,6 +33,8 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         databaseHelper = new DatabaseHelper(SQLConnection.connectToDatabase());
         this.setLocationRelativeTo(null);
+        
+        currentTimeStamp = databaseHelper.getCurrentTimeStamp();
     }
 
     /**
@@ -110,6 +113,7 @@ public class Login extends javax.swing.JFrame {
             int rowCount = 0;
             while (rs.next()) {
                 rowCount++;
+                int accountId = rs.getInt("ID");
                 String username = rs.getString("Username");
                 String password = rs.getString("Password");
                 String status = rs.getString("Status");
@@ -117,6 +121,7 @@ public class Login extends javax.swing.JFrame {
                     if (username.equals(txtUsername.getText()) && password.equals(txtPassword.getText())) {
                         login_user = txtUsername.getText();
                         JOptionPane.showMessageDialog(null, "Login successful!");
+                        databaseHelper.insertData("tblaccountlogs", String.valueOf(accountId), currentTimeStamp);
                         this.dispose();
                         new Main().setVisible(true);
                     } else if (username.equals(txtUsername.getText()) && !password.equals(txtPassword.getText())) {

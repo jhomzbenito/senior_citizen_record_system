@@ -204,7 +204,7 @@ public class Account extends javax.swing.JFrame {
 
     private void btnEnableAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnableAccountActionPerformed
         //a confirmation dialog for unblocking the  user
-        int ans = JOptionPane.showOptionDialog(null, "Do you want to unblock this user?", null,
+        int ans = JOptionPane.showOptionDialog(null, "Do you want to enable this user?", null,
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
         if (ans == 0) { //anser is yess
             databaseHelper.updateData("tblaccount", "Status", "ACTIVE", "Username", username);
@@ -323,7 +323,7 @@ public class Account extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
         if (ans == 0) { //answer is yes
             databaseHelper.updateData("tblaccount", "Status", "DISABLED", "Username", username);
-            JOptionPane.showMessageDialog(null, username + " has been enabled successfully");
+            JOptionPane.showMessageDialog(null, username + " has been disabled successfully");
             displayRecords();
         }
         btnDeleteAccount.setEnabled(false);

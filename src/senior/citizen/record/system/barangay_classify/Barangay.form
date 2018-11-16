@@ -67,7 +67,7 @@
             <Component class="javax.swing.JButton" name="btnAntipolo">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_antipolo.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_antipolo.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -77,7 +77,7 @@
             <Component class="javax.swing.JButton" name="btnAriendo">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Ariendo.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Ariendo.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -87,7 +87,7 @@
             <Component class="javax.swing.JButton" name="btnBantog">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Bantog.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Bantog.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -97,7 +97,7 @@
             <Component class="javax.swing.JButton" name="btnCalaanan">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Calaanan.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Calaanan.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -107,7 +107,7 @@
             <Component class="javax.swing.JButton" name="btnCruz">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_cruz.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_cruz.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -117,7 +117,7 @@
             <Component class="javax.swing.JButton" name="btnCurva">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Curva.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Curva.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -127,7 +127,7 @@
             <Component class="javax.swing.JButton" name="btnDigmala">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Digmala.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Digmala.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -137,7 +137,7 @@
             <Component class="javax.swing.JButton" name="btnCaingin">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Caingin.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Caingin.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -147,7 +147,7 @@
             <Component class="javax.swing.JButton" name="btnLabi">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Labi.jpg"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Labi.jpg"/>
                 </Property>
               </Properties>
               <Events>
@@ -157,7 +157,7 @@
             <Component class="javax.swing.JButton" name="btnLarcon">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Larcon.jpg"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Larcon.jpg"/>
                 </Property>
               </Properties>
               <Events>
@@ -167,7 +167,7 @@
             <Component class="javax.swing.JButton" name="btnLusok">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Lusok.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Lusok.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -177,7 +177,7 @@
             <Component class="javax.swing.JButton" name="btnMacabaklay">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Macabaklay.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Macabaklay.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -187,7 +187,7 @@
             <Component class="javax.swing.JButton" name="btnMatanggol">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Matanggol.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Matanggol.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -197,7 +197,7 @@
             <Component class="javax.swing.JButton" name="btnMantile">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Mantile.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Mantile.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -207,7 +207,7 @@
             <Component class="javax.swing.JButton" name="btnOlibete">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Olibete.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Olibete.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -217,7 +217,7 @@
             <Component class="javax.swing.JButton" name="btnPalomaria">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Palomaria.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Palomaria.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -227,7 +227,7 @@
             <Component class="javax.swing.JButton" name="btnPesa">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Pesa.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Pesa.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -237,7 +237,7 @@
             <Component class="javax.swing.JButton" name="btnRizal">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Rizal.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Rizal.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -247,7 +247,7 @@
             <Component class="javax.swing.JButton" name="btnSampalukan">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Sampalukan.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Sampalukan.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -257,7 +257,7 @@
             <Component class="javax.swing.JButton" name="btnSanRoque">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_San Roque.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_San Roque.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -267,7 +267,7 @@
             <Component class="javax.swing.JButton" name="btnSantor">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Santor.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Santor.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -277,7 +277,7 @@
             <Component class="javax.swing.JButton" name="btnSinipit">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Sinipit.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Sinipit.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -287,7 +287,7 @@
             <Component class="javax.swing.JButton" name="btnSisilang">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Sisilang.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Sisilang.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -297,7 +297,7 @@
             <Component class="javax.swing.JButton" name="btnSocial">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Social.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Social.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -307,7 +307,7 @@
             <Component class="javax.swing.JButton" name="btnTogatog">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Togatog.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Togatog.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -317,7 +317,7 @@
             <Component class="javax.swing.JButton" name="btnTulaynaBato">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Tulay na bato.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Tulay na bato.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -327,7 +327,7 @@
             <Component class="javax.swing.JButton" name="btnCommercial">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Commercial.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Commercial.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -337,7 +337,7 @@
             <Component class="javax.swing.JButton" name="btnVega">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/btn_Vega.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\btn_Vega.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -372,7 +372,7 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/senior/citizen/record/system/barangay_classify/mainbackground.png"/>
+                  <Image iconType="2" name="C:\Users\Lalaine Ganda\Desktop\senior_citizen_record_system\img\mainbackground.png"/>
                 </Property>
               </Properties>
             </Component>

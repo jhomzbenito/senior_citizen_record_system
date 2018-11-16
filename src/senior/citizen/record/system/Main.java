@@ -79,7 +79,7 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnPayment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/finalpayment.png"))); // NOI18N
+        btnPayment.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalpayment.png")); // NOI18N
         btnPayment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPaymentActionPerformed(evt);
@@ -87,7 +87,7 @@ public class Main extends javax.swing.JFrame {
         });
         jPanel1.add(btnPayment, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, 180, 170));
 
-        btnBarangay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/finalbarangay.png"))); // NOI18N
+        btnBarangay.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalbarangay.png")); // NOI18N
         btnBarangay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBarangayActionPerformed(evt);
@@ -95,7 +95,7 @@ public class Main extends javax.swing.JFrame {
         });
         jPanel1.add(btnBarangay, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, 180, 170));
 
-        btnRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/finalregister.png"))); // NOI18N
+        btnRegister.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalregister.png")); // NOI18N
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegisterActionPerformed(evt);
@@ -103,7 +103,7 @@ public class Main extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 180, 170));
 
-        btnReports.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/finalreports.png"))); // NOI18N
+        btnReports.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalreports.png")); // NOI18N
         btnReports.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReportsActionPerformed(evt);
@@ -111,7 +111,7 @@ public class Main extends javax.swing.JFrame {
         });
         jPanel1.add(btnReports, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 510, 180, 170));
 
-        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/finalexit.png"))); // NOI18N
+        btnExit.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalexit.png")); // NOI18N
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -119,7 +119,7 @@ public class Main extends javax.swing.JFrame {
         });
         jPanel1.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, 180, 170));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/senior/citizen/record/system/mainbackground.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\mainbackground.png")); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 730));
 
         jMenu2.setText("File");

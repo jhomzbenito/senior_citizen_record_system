@@ -6,6 +6,7 @@
 package senior.citizen.record.system;
 
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -17,6 +18,7 @@ import senior.citizen.record.system.account.register.Register;
 import senior.citizen.record.system.barangay_classify.Barangay;
 import senior.citizen.record.system.db.DatabaseHelper;
 import senior.citizen.record.system.db.SQLConnection;
+import senior.citizen.record.system.reports.Reports;
 
 /**
  *
@@ -33,10 +35,10 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         databaseHelper = new DatabaseHelper(SQLConnection.connectToDatabase());
-//        Toolkit tk = Toolkit.getDefaultToolkit();
-//        int xsize = (int) tk.getScreenSize().getWidth();
-//        int ysize = (int) tk.getScreenSize().getHeight();
-//        this.setSize(xsize, ysize);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xsize = (int) tk.getScreenSize().getWidth();
+        int ysize = (int) tk.getScreenSize().getHeight();
+        this.setSize(xsize, ysize);
         this.setLocationRelativeTo(null);
         checkUser();
     }
@@ -74,10 +76,12 @@ public class Main extends javax.swing.JFrame {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
         });
 
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPayment.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalpayment.png")); // NOI18N
         btnPayment.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +89,6 @@ public class Main extends javax.swing.JFrame {
                 btnPaymentActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPayment, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, 180, 170));
 
         btnBarangay.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalbarangay.png")); // NOI18N
         btnBarangay.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +96,6 @@ public class Main extends javax.swing.JFrame {
                 btnBarangayActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBarangay, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, 180, 170));
 
         btnRegister.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalregister.png")); // NOI18N
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +103,6 @@ public class Main extends javax.swing.JFrame {
                 btnRegisterActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 180, 170));
 
         btnReports.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalreports.png")); // NOI18N
         btnReports.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +110,6 @@ public class Main extends javax.swing.JFrame {
                 btnReportsActionPerformed(evt);
             }
         });
-        jPanel1.add(btnReports, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 510, 180, 170));
 
         btnExit.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalexit.png")); // NOI18N
         btnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -117,10 +117,57 @@ public class Main extends javax.swing.JFrame {
                 btnExitActionPerformed(evt);
             }
         });
-        jPanel1.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, 180, 170));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\mainbackground.png")); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 730));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(316, 316, 316)
+                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(116, 116, 116)
+                        .addComponent(btnBarangay, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(479, 479, 479)
+                        .addComponent(btnPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100)
+                        .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(286, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnBarangay, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(331, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(66, 66, 66))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(68, 68, 68)))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(btnPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))))
+        );
 
         jMenu2.setText("File");
 
@@ -204,49 +251,41 @@ public class Main extends javax.swing.JFrame {
 
     private void btnReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportsActionPerformed
         // TODO add your handling code here:
+        new Reports().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnReportsActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        JTextField username = new JTextField();
-        JTextField password = new JPasswordField();
-        Object[] message = {
-            "Username:", username,
-            "Password:", password
-        };
-
-        int option = JOptionPane.showConfirmDialog(null, message, "Login", JOptionPane.OK_CANCEL_OPTION);
-        if (option == JOptionPane.OK_OPTION) {
-            if (username.getText().equals("h") && password.getText().equals("h")) {
-                System.out.println("Login successful");
-            } else {
-                System.out.println("login failed");
-            }
-        } else {
-            System.out.println("Login canceled");
-        }
+        new Login().setVisible(true);
+        this.dispose();
+        Login.login_user = null;
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void jMenuItem_change_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_change_usernameActionPerformed
         // TODO add your handling code here:
         String new_username = JOptionPane.showInputDialog("Enter your new username");
-        rs = databaseHelper.getAllData("tblaccount");
-        boolean match = false;
-        try {
-            while(rs.next()){
-                String username = rs.getString("Username");
-                if (username.equals(new_username)){
-                    match = true;
-                    JOptionPane.showMessageDialog(null, "Try a different username, that "
-                            + "is already taken");
-                    break;
+        if (!new_username.isEmpty()) {
+            rs = databaseHelper.getAllData("tblaccount");
+            boolean match = false;
+            try {
+                while (rs.next()) {
+                    String username = rs.getString("Username");
+                    if (username.equals(new_username)) {
+                        match = true;
+                        JOptionPane.showMessageDialog(null, "Try a different username, that "
+                                + "is already taken");
+                        break;
+                    }
                 }
+                if (!match) {
+                    databaseHelper.updateData("tblaccount", "Username", new_username, "Username", Login.login_user);
+                    JOptionPane.showMessageDialog(null, "Username has been succesfully changed");
+                }
+            } catch (HeadlessException | SQLException e) {
             }
-            if (!match) {
-                databaseHelper.updateData("tblaccount", "Username", new_username, "Username", Login.login_user);
-                JOptionPane.showMessageDialog(null, "Username has been succesfully changed");
-            }
-        } catch (HeadlessException | SQLException e) {
+        } else {
+            JOptionPane.showMessageDialog(null, "Username cannot be blank");
         }
     }//GEN-LAST:event_jMenuItem_change_usernameActionPerformed
 
@@ -296,22 +335,34 @@ public class Main extends javax.swing.JFrame {
     private void jMenuItem_account_managementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_account_managementActionPerformed
         // TODO add your handling code here:
         new Account().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem_account_managementActionPerformed
 
-    private void checkUser(){
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if (Login.login_user == null) {
+            this.dispose();
+            new Login().setVisible(true);
+        }
+        checkUser();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void checkUser() {
         rs = databaseHelper.getAllDataOf("tblAccount", "Username", Login.login_user);
         try {
-            if(rs.next()){
+            if (rs.next()) {
                 String type = rs.getString("User Type");
-                if (type.equals("STAFF")){
+                if (type.equals("STAFF")) {
                     jMenuItem_account_management.setVisible(false);
                     btnPayment.setVisible(false);
                     btnReports.setVisible(false);
                 }
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
+
     /**
      * @param args the command line arguments
      */

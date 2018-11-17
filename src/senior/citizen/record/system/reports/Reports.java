@@ -5,17 +5,54 @@
  */
 package senior.citizen.record.system.reports;
 
+import java.awt.Desktop;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import senior.citizen.record.system.Main;
+import senior.citizen.record.system.account.login.Login;
+import senior.citizen.record.system.db.DatabaseHelper;
+import senior.citizen.record.system.db.SQLConnection;
+import senior.citizen.record.system.utils.CSVUtils;
+import senior.citizen.record.system.utils.DataTableUtils;
+import senior.citizen.record.system.utils.StringConstants;
+
 /**
  *
  * @author Lalaine Ganda
  */
 public class Reports extends javax.swing.JFrame {
 
+    DatabaseHelper databaseHelper;
+    ResultSet rs;
+    ResultSetMetaData rsmd;
+    DefaultTableModel dtm;
+
     /**
      * Creates new form Reports
      */
     public Reports() {
         initComponents();
+        databaseHelper = new DatabaseHelper(SQLConnection.connectToDatabase());
+        displayAccountLogs();
+        displaySeniorRecordsLogs();
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xsize = (int) tk.getScreenSize().getWidth();
+        int ysize = (int) tk.getScreenSize().getHeight();
+        this.setSize(xsize, ysize);
     }
 
     /**
@@ -28,36 +65,291 @@ public class Reports extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblSeniorRecordsLogs = new javax.swing.JTable();
+        btnExportSeniorRecords = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        btnOkSenior = new javax.swing.JButton();
+        jdcTo = new com.toedter.calendar.JDateChooser();
+        jLabel3 = new javax.swing.JLabel();
+        jdcFrom = new com.toedter.calendar.JDateChooser();
+        txtSearchSeniorLogs = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblAccountLogs = new javax.swing.JTable();
+        btnExportAccountLogs = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jdcFrom1 = new com.toedter.calendar.JDateChooser();
+        jLabel6 = new javax.swing.JLabel();
+        txtSearchAccountLogs = new javax.swing.JTextField();
+        jdcTo1 = new com.toedter.calendar.JDateChooser();
+        btnOkAccount = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+        jTabbedPane1.setBackground(new java.awt.Color(204, 255, 143));
+
+        jPanel2.setBackground(new java.awt.Color(204, 255, 143));
+
+        tblSeniorRecordsLogs.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblSeniorRecordsLogs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSeniorRecordsLogsMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblSeniorRecordsLogs);
+
+        btnExportSeniorRecords.setText("Export as CSV File");
+        btnExportSeniorRecords.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportSeniorRecordsActionPerformed(evt);
+            }
+        });
+
+        jPanel4.setBackground(new java.awt.Color(204, 255, 143));
+
+        jLabel2.setText("Date From");
+
+        jLabel1.setText("Search by Username");
+
+        btnOkSenior.setText("Ok");
+        btnOkSenior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkSeniorActionPerformed(evt);
+            }
+        });
+
+        jdcTo.setDateFormatString("MM/dd/yyyy");
+
+        jLabel3.setText("Date To");
+
+        jdcFrom.setDateFormatString("MM/dd/yyyy");
+        jdcFrom.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdcFromPropertyChange(evt);
+            }
+        });
+
+        txtSearchSeniorLogs.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchSeniorLogsKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSearchSeniorLogs, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jdcFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jdcTo, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnOkSenior)
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 276, Short.MAX_VALUE)
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnOkSenior)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(txtSearchSeniorLogs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jdcFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jdcTo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
-
-        jTabbedPane1.addTab("Account Logs", jPanel1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(120, 120, 120)
+                        .addComponent(btnExportSeniorRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 276, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnExportSeniorRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Senior Record Logs", jPanel2);
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 143));
+
+        tblAccountLogs.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblAccountLogs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAccountLogsMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblAccountLogs);
+
+        btnExportAccountLogs.setText("Export as CSV File");
+        btnExportAccountLogs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportAccountLogsActionPerformed(evt);
+            }
+        });
+
+        jPanel3.setBackground(new java.awt.Color(204, 255, 143));
+
+        jLabel4.setText("Search by Username");
+
+        jLabel5.setText("Date From");
+
+        jdcFrom1.setDateFormatString("MM/dd/yyyy");
+        jdcFrom1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdcFrom1PropertyChange(evt);
+            }
+        });
+
+        jLabel6.setText("Date To");
+
+        txtSearchAccountLogs.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchAccountLogsKeyReleased(evt);
+            }
+        });
+
+        jdcTo1.setDateFormatString("MM/dd/yyyy");
+
+        btnOkAccount.setText("Ok");
+        btnOkAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkAccountActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSearchAccountLogs, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jdcFrom1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jdcTo1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnOkAccount)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnOkAccount)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(txtSearchAccountLogs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6))
+                    .addComponent(jdcTo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jdcFrom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(108, 108, 108)
+                        .addComponent(btnExportAccountLogs, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnExportAccountLogs, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Account Logs", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,6 +364,281 @@ public class Reports extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblSeniorRecordsLogsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSeniorRecordsLogsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblSeniorRecordsLogsMouseClicked
+
+    private void tblAccountLogsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAccountLogsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblAccountLogsMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if (Login.login_user == null) {
+            this.dispose();
+            new Login().setVisible(true);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        new Main().setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void btnExportAccountLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportAccountLogsActionPerformed
+        // TODO add your handling code here:
+        displayAccountLogs();
+        String currentTimeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        final String FILETYPE = ".csv";
+        FileWriter fileWriter;
+        int ans = JOptionPane.showOptionDialog(null, "Generate a report for the details on "
+                + "the table below?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null, null, null);
+        if (ans == 0) {
+            try {
+                String filename = StringConstants.ACCOUNT_LOGS_PATH + currentTimeStamp + FILETYPE;
+                fileWriter = new FileWriter(filename);
+
+                rs = databaseHelper.getAllData("tblaccountlogs");
+                rsmd = rs.getMetaData();
+                int columns = rsmd.getColumnCount();
+                List<String> column_name = new ArrayList<>();
+                for (int i = 2; i <= columns; i++) {
+                    column_name.add(rsmd.getColumnName(i));
+                }
+
+                CSVUtils.writeLine(fileWriter, column_name);
+
+                for (int i = 0; i < dtm.getDataVector().size(); i++) {
+                    CSVUtils.writeLine(fileWriter, Arrays.asList(String.valueOf(dtm.getDataVector().get(i))));
+                }
+
+                fileWriter.flush();
+                fileWriter.close();
+                JOptionPane.showMessageDialog(null, "Report has been generated ");
+                Desktop.getDesktop().open(new File(filename));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "Reports Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnExportAccountLogsActionPerformed
+
+    private void txtSearchSeniorLogsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchSeniorLogsKeyReleased
+        // TODO add your handling code here:
+        tblSeniorRecordsLogs.removeAll();
+        String searchData = txtSearchSeniorLogs.getText();
+        try {
+            rs = databaseHelper.searchData("tblseniorrecordslogs", "Created by", searchData);
+            rsmd = rs.getMetaData();
+
+            int columns = rsmd.getColumnCount();
+
+            dtm = DataTableUtils.populateTable(columns, rsmd, rs);
+
+            tblSeniorRecordsLogs.setModel(dtm);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txtSearchSeniorLogsKeyReleased
+
+    private void btnOkSeniorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkSeniorActionPerformed
+        // TODO add your handling code here:
+        String from = ((JTextField) jdcFrom.getDateEditor().getUiComponent()).getText();
+        String to = ((JTextField) jdcTo.getDateEditor().getUiComponent()).getText();
+        if (from.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please select a date from.", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (to.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please select a date to.", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            searchByRangeOfSeniorLogs(from, to);
+        }
+    }//GEN-LAST:event_btnOkSeniorActionPerformed
+
+    private void jdcFromPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcFromPropertyChange
+        // TODO add your handling code here:
+        java.util.Date d2 = jdcFrom.getDate();
+        if (d2 == null) {
+            //nothing
+        } else {
+            java.sql.Date sqlDate = new java.sql.Date(d2.getTime());
+            jdcTo.setCalendar(null);
+            jdcTo.getJCalendar().setMinSelectableDate(sqlDate);
+        }
+    }//GEN-LAST:event_jdcFromPropertyChange
+
+    private void txtSearchAccountLogsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchAccountLogsKeyReleased
+        // TODO add your handling code here:
+        tblAccountLogs.removeAll();
+        String searchData = txtSearchAccountLogs.getText();
+        if (!searchData.contains("'")) {
+            String query = "SELECT b.ID, a.Username, b.`Date and Time Log` "
+                    + "FROM tblaccount a, tblaccountlogs b "
+                    + "WHERE a.ID = b.`Account ID` "
+                    + "AND a.Username LIKE '" + searchData + "%'"
+                    + " ORDER BY `Date and Time Log`";
+            try {
+                rs = databaseHelper.customQuery(query);
+                rsmd = rs.getMetaData();
+
+                int columns = rsmd.getColumnCount();
+
+                dtm = DataTableUtils.populateTable(columns, rsmd, rs);
+
+                tblAccountLogs.setModel(dtm);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "Database Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtSearchAccountLogsKeyReleased
+
+    private void jdcFrom1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcFrom1PropertyChange
+        // TODO add your handling code here:
+        java.util.Date d2 = jdcFrom1.getDate();
+        if (d2 == null) {
+            //nothing
+        } else {
+            java.sql.Date sqlDate = new java.sql.Date(d2.getTime());
+            jdcTo1.setCalendar(null);
+            jdcTo1.getJCalendar().setMinSelectableDate(sqlDate);
+        }
+    }//GEN-LAST:event_jdcFrom1PropertyChange
+
+    private void btnOkAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkAccountActionPerformed
+        // TODO add your handling code here:
+        String from = ((JTextField) jdcFrom1.getDateEditor().getUiComponent()).getText();
+        String to = ((JTextField) jdcTo1.getDateEditor().getUiComponent()).getText();
+        if (from.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please select a date from.", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (to.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please select a date to.", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            searchByRangeOfAccountLogs(from, to);
+        }
+    }//GEN-LAST:event_btnOkAccountActionPerformed
+
+    private void btnExportSeniorRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportSeniorRecordsActionPerformed
+        // TODO add your handling code here:
+        String currentTimeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        final String FILETYPE = ".csv";
+        FileWriter fileWriter;
+        int ans = JOptionPane.showOptionDialog(null, "Generate a report for the details on "
+                + "the table below?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null, null, null);
+        if (ans == 0) {
+            try {
+                String filename = StringConstants.SENIOR_LOGS_PATH + currentTimeStamp + FILETYPE;
+                fileWriter = new FileWriter(filename);
+
+                rs = databaseHelper.getAllData("tblseniorrecordslogs");
+                rsmd = rs.getMetaData();
+                int columns = rsmd.getColumnCount();
+                List<String> column_name = new ArrayList<>();
+                for (int i = 2; i <= columns; i++) {
+                    column_name.add(rsmd.getColumnName(i));
+                }
+
+                CSVUtils.writeLine(fileWriter, column_name);
+
+                for (int i = 0; i < dtm.getDataVector().size(); i++) {
+                    CSVUtils.writeLine(fileWriter, Arrays.asList(String.valueOf(dtm.getDataVector().get(i))));
+                }
+
+                fileWriter.flush();
+                fileWriter.close();
+                JOptionPane.showMessageDialog(null, "Report has been generated ");
+                Desktop.getDesktop().open(new File(filename));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "Reports Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnExportSeniorRecordsActionPerformed
+
+    private void displaySeniorRecordsLogs() {
+        tblSeniorRecordsLogs.removeAll();
+        try {
+            rs = databaseHelper.getAllData("tblseniorrecordslogs");
+            rsmd = rs.getMetaData();
+
+            int columns = rsmd.getColumnCount();
+
+            dtm = DataTableUtils.populateTable(columns, rsmd, rs);
+
+            tblSeniorRecordsLogs.setModel(dtm);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void displayAccountLogs() {
+        tblAccountLogs.removeAll();
+        String query = "SELECT b.ID, a.Username, b.`Date and Time Log` "
+                + "FROM tblaccount a, tblaccountlogs b "
+                + "WHERE a.ID = b.`Account ID` "
+                + "ORDER BY `Date and Time Log`";
+        try {
+            rs = databaseHelper.customQuery(query);
+            rsmd = rs.getMetaData();
+
+            int columns = rsmd.getColumnCount();
+
+            dtm = DataTableUtils.populateTable(columns, rsmd, rs);
+
+            tblAccountLogs.setModel(dtm);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void searchByRangeOfAccountLogs(String from, String to) {
+        tblAccountLogs.removeAll();
+        String query = "SELECT b.ID, a.Username, b.`Date and Time Log` "
+                + "FROM tblaccount a, tblaccountlogs b "
+                + "WHERE a.ID = b.`Account ID` "
+                + "AND b.`Date and Time Log` BETWEEN '" + from + "%' AND '" + to + "%' "
+                + "OR b.`Date and Time Log` LIKE '" + from + "%'"
+                + "ORDER BY `Date and Time Log`";
+        try {
+            rs = databaseHelper.customQuery(query);
+            rsmd = rs.getMetaData();
+
+            int columns = rsmd.getColumnCount();
+
+            dtm = DataTableUtils.populateTable(columns, rsmd, rs);
+
+            tblAccountLogs.setModel(dtm);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void searchByRangeOfSeniorLogs(String from, String to) {
+        tblSeniorRecordsLogs.removeAll();
+        String query = "SELECT * FROM tblseniorrecordslogs "
+                + "WHERE `Date Created` BETWEEN '" + from + "' AND '" + to + "' "
+                + "OR `Date Created` LIKE '" + from + "'"
+                + "ORDER BY `Date Created`";
+        try {
+            rs = databaseHelper.customQuery(query);
+            rsmd = rs.getMetaData();
+
+            int columns = rsmd.getColumnCount();
+
+            dtm = DataTableUtils.populateTable(columns, rsmd, rs);
+
+            tblSeniorRecordsLogs.setModel(dtm);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -109,8 +676,31 @@ public class Reports extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExportAccountLogs;
+    private javax.swing.JButton btnExportSeniorRecords;
+    private javax.swing.JButton btnOkAccount;
+    private javax.swing.JButton btnOkSenior;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private com.toedter.calendar.JDateChooser jdcFrom;
+    private com.toedter.calendar.JDateChooser jdcFrom1;
+    private com.toedter.calendar.JDateChooser jdcTo;
+    private com.toedter.calendar.JDateChooser jdcTo1;
+    private javax.swing.JTable tblAccountLogs;
+    private javax.swing.JTable tblSeniorRecordsLogs;
+    private javax.swing.JTextField txtSearchAccountLogs;
+    private javax.swing.JTextField txtSearchSeniorLogs;
     // End of variables declaration//GEN-END:variables
+
 }

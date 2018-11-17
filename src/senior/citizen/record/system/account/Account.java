@@ -5,6 +5,7 @@
  */
 package senior.citizen.record.system.account;
 
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import senior.citizen.record.system.Main;
+import senior.citizen.record.system.account.login.Login;
 import senior.citizen.record.system.db.DatabaseHelper;
 import senior.citizen.record.system.db.SQLConnection;
 import senior.citizen.record.system.utils.DataTableUtils;
@@ -36,6 +38,10 @@ public class Account extends javax.swing.JFrame {
     public Account() {
         initComponents();
         databaseHelper = new DatabaseHelper(SQLConnection.connectToDatabase());
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xsize = (int) tk.getScreenSize().getWidth();
+        int ysize = (int) tk.getScreenSize().getHeight();
+        this.setSize(xsize, ysize);
         displayRecords();
         this.setLocationRelativeTo(null);
     }
@@ -78,16 +84,26 @@ public class Account extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                formWindowLostFocus(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jPanel2.setBackground(new java.awt.Color(153, 255, 51));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User Accounts", 0, 0, new java.awt.Font("Tahoma", 0, 18), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(204, 255, 143));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User Accounts", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
         btnEnableAccount.setText("Enable Account");
         btnEnableAccount.setEnabled(false);
@@ -134,7 +150,6 @@ public class Account extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Search:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -144,12 +159,12 @@ public class Account extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 990, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSearchAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 429, Short.MAX_VALUE)
+                        .addComponent(txtSearchAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAddAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDeleteAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,8 +233,7 @@ public class Account extends javax.swing.JFrame {
 
     private void txtSearchAccountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchAccountKeyReleased
         String find = txtSearchAccount.getText();
-        find = find.toUpperCase().trim();
-//        searchAccount(find);
+        searchAccount(find);
     }//GEN-LAST:event_txtSearchAccountKeyReleased
 
     private void tblAccountsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAccountsMouseClicked
@@ -336,6 +350,19 @@ public class Account extends javax.swing.JFrame {
         new Main().setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
+    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+        // TODO add your handling code here:
+        this.requestFocus();
+    }//GEN-LAST:event_formWindowLostFocus
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if (Login.login_user == null) {
+            this.dispose();
+            new Login().setVisible(true);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
     private void displayRecords() {
         tblAccounts.removeAll();
         try {
@@ -352,6 +379,23 @@ public class Account extends javax.swing.JFrame {
                     "Database Error", JOptionPane.ERROR_MESSAGE);
         }
 
+    }
+    
+    private void searchAccount(String find) {
+        tblAccounts.removeAll();
+        try {
+            rs = databaseHelper.searchDataOf("tblaccount", "User Type", "STAFF", "Username", find);
+            rsmd = rs.getMetaData();
+
+            int columns = rsmd.getColumnCount();
+
+            dtm = DataTableUtils.populateTable(columns, rsmd, rs);
+
+            tblAccounts.setModel(dtm);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -402,4 +446,6 @@ public class Account extends javax.swing.JFrame {
     private javax.swing.JTable tblAccounts;
     private javax.swing.JTextField txtSearchAccount;
     // End of variables declaration//GEN-END:variables
+
+    
 }

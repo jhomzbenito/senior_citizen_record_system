@@ -26,11 +26,13 @@ public class Barangay extends javax.swing.JFrame {
      */
     public Barangay() {
         initComponents();
-//        Toolkit tk = Toolkit.getDefaultToolkit();
-//        int xsize = (int) tk.getScreenSize().getWidth();
-//        int ysize = (int) tk.getScreenSize().getHeight();
-//        this.setSize(xsize, ysize);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xsize = (int) tk.getScreenSize().getWidth();
+        int ysize = (int) tk.getScreenSize().getHeight();
+        this.setSize(xsize, ysize);
         this.setLocationRelativeTo(null);
+        btnAntipolo.updateUI();
+        btnVega.updateUI();
     }
 
     /**
@@ -47,11 +49,12 @@ public class Barangay extends javax.swing.JFrame {
         btnAntipolo = new javax.swing.JButton();
         btnAriendo = new javax.swing.JButton();
         btnBantog = new javax.swing.JButton();
+        btnCaingin = new javax.swing.JButton();
         btnCalaanan = new javax.swing.JButton();
+        btnCommercial = new javax.swing.JButton();
         btnCruz = new javax.swing.JButton();
         btnCurva = new javax.swing.JButton();
         btnDigmala = new javax.swing.JButton();
-        btnCaingin = new javax.swing.JButton();
         btnLabi = new javax.swing.JButton();
         btnLarcon = new javax.swing.JButton();
         btnLusok = new javax.swing.JButton();
@@ -70,9 +73,7 @@ public class Barangay extends javax.swing.JFrame {
         btnSocial = new javax.swing.JButton();
         btnTogatog = new javax.swing.JButton();
         btnTulaynaBato = new javax.swing.JButton();
-        btnCommercial = new javax.swing.JButton();
         btnVega = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -83,9 +84,8 @@ public class Barangay extends javax.swing.JFrame {
             }
         });
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel1.setLayout(new java.awt.GridLayout(4, 7, 3, 3));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 153));
+        jPanel1.setLayout(new java.awt.GridLayout(4, 7, 15, 15));
 
         btnAntipolo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_antipolo.png")); // NOI18N
         btnAntipolo.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +111,14 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnBantog);
 
+        btnCaingin.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Caingin.png")); // NOI18N
+        btnCaingin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCainginActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCaingin);
+
         btnCalaanan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Calaanan.png")); // NOI18N
         btnCalaanan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +126,14 @@ public class Barangay extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnCalaanan);
+
+        btnCommercial.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Commercial.png")); // NOI18N
+        btnCommercial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCommercialActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCommercial);
 
         btnCruz.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_cruz.png")); // NOI18N
         btnCruz.addActionListener(new java.awt.event.ActionListener() {
@@ -142,14 +158,6 @@ public class Barangay extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnDigmala);
-
-        btnCaingin.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Caingin.png")); // NOI18N
-        btnCaingin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCainginActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnCaingin);
 
         btnLabi.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Labi.jpg")); // NOI18N
         btnLabi.addActionListener(new java.awt.event.ActionListener() {
@@ -295,14 +303,6 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnTulaynaBato);
 
-        btnCommercial.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Commercial.png")); // NOI18N
-        btnCommercial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCommercialActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnCommercial);
-
         btnVega.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\btn_Vega.png")); // NOI18N
         btnVega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -311,24 +311,28 @@ public class Barangay extends javax.swing.JFrame {
         });
         jPanel1.add(btnVega);
 
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 760, -1));
-
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\mainbackground.png")); // NOI18N
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1024, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(275, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(275, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1371, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(180, 180, 180)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(82, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 757, Short.MAX_VALUE))
         );
-
-        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -540,7 +544,6 @@ public class Barangay extends javax.swing.JFrame {
     private javax.swing.JButton btnVega;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

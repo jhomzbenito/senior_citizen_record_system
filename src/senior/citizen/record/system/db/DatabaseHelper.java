@@ -88,36 +88,38 @@ public class DatabaseHelper {
         }
         return rs;
     }
-    
-    public ResultSet searchData(String tableName, String columnName, String searchValue) {
-        try {
-            String sql = "SELECT * FROM " + tableName + " WHERE " + columnName + " LIKE % ?";
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, searchValue);
-            rs = ps.executeQuery();
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Database Error", JOptionPane.ERROR_MESSAGE);
+    public ResultSet searchData(String tableName, String columnName, String searchValue) {
+        if (!searchValue.contains("'")) {
+            try {
+                String sql = "SELECT * FROM " + tableName + " WHERE `" + columnName + "` LIKE '" + searchValue + "%'";
+                ps = conn.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "Database Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         return rs;
     }
-    
-    public ResultSet searchDataOf(String tableName, String whereColumn, 
-            String whereArgs, String columnName, String searchValue) {
-        try {
-            String sql = "SELECT * FROM " + tableName + " WHERE " + whereColumn +
-                    " = ? AND "+ columnName + " LIKE % ?";
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, whereArgs);
-            ps.setString(2, searchValue);
-            rs = ps.executeQuery();
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Database Error", JOptionPane.ERROR_MESSAGE);
+    public ResultSet searchDataOf(String tableName, String whereColumn,
+            String whereArgs, String columnName, String searchValue) {
+        if (!searchValue.contains("'")) {
+            try {
+                String sql = "SELECT * FROM " + tableName + " WHERE `" + whereColumn
+                        + "` = ? AND `" + columnName + "` LIKE '" + searchValue + "%'";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, whereArgs);
+                rs = ps.executeQuery();
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "Database Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         return rs;
     }
@@ -149,14 +151,14 @@ public class DatabaseHelper {
                     "Database Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    public String getCurrentDate(){
+
+    public String getCurrentDate() {
         String currentDate = null;
         try {
-            String sql = "SELECT DATE_FORMAT(CURRENT_DATE, '%b %d, %Y') AS `Current Date`";
+            String sql = "SELECT DATE_FORMAT(CURRENT_DATE, '%m/%d/%Y') AS `Current Date`";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 currentDate = rs.getString("Current Date");
             }
@@ -168,14 +170,14 @@ public class DatabaseHelper {
         }
         return currentDate;
     }
-    
-    public String getCurrentTimeStamp(){
+
+    public String getCurrentTimeStamp() {
         String currentTimeStamp = null;
         try {
-            String sql = "SELECT CURRENT_TIMESTAMP AS `Current Time Stamp`";
+            String sql = "SELECT DATE_FORMAT(CURRENT_TIMESTAMP, '%m/%d/%Y %r') AS `Current Time Stamp`";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 currentTimeStamp = rs.getString("Current Time Stamp");
             }
@@ -187,4 +189,18 @@ public class DatabaseHelper {
         }
         return currentTimeStamp;
     }
+
+    public ResultSet customQuery(String query) {
+        try {
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return rs;
+    }
+
 }

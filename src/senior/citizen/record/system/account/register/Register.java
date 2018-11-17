@@ -46,7 +46,7 @@ public class Register extends javax.swing.JFrame {
         Calendar maxCalendar = Calendar.getInstance();
         maxCalendar.set(Calendar.YEAR, maxCalendar.get(Calendar.YEAR) - MAX_AGE);
         jdcBday.setMaxSelectableDate(maxCalendar.getTime());
-        
+
         currentDate = databaseHelper.getCurrentDate();
     }
 
@@ -377,6 +377,7 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_rdoFemaleActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+
         String address = txtAddress.getText().replaceAll(",", "");
         String birthPlace = txtBirthPlace.getText().replaceAll(",", "");
         String birthdate = ((JTextField) jdcBday.getDateEditor().getUiComponent()).getText();
@@ -389,27 +390,51 @@ public class Register extends javax.swing.JFrame {
         String gender = GroupButtonUtils.getSelectedButtonText(btnGrpGender);
         String age = txtAge.getText();
 
+        boolean exist = false;
+        rs = databaseHelper.getAllData("tblseniorrecords");
+
         try {
-            if (seniorID.isEmpty() || cboBrgy.getSelectedIndex() == -1 || cboStatus.getSelectedIndex() == -1
-                    || address.isEmpty() || birthPlace.isEmpty() || birthdate.isEmpty()
-                    || firstName.isEmpty() || lastName.isEmpty() || groupName.isEmpty()
-                    || groupArea.isEmpty() || gender == null || age.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "All fields are required",
-                        "Registration Error", JOptionPane.ERROR_MESSAGE);
-            } else if (Integer.parseInt(age) < MAX_AGE){
-                JOptionPane.showMessageDialog(null, "Entry is not eligible. Age must be atleast "
-                        + "60 years old.",
-                        "Registration Error", JOptionPane.ERROR_MESSAGE);
-            }else {
-                String brgy = cboBrgy.getSelectedItem().toString();
-                String status = cboStatus.getSelectedItem().toString();
-                databaseHelper.insertData("tblseniorrecords", seniorID, firstName,
-                        middleName, lastName, groupName, groupArea, brgy, address,
-                        birthdate, birthPlace, age, gender, status);
-                databaseHelper.insertData("tblseniorrecordslogs", seniorID, currentDate, Login.login_user);
-                JOptionPane.showMessageDialog(null, "New senior record has been successfully registered");
-                clearFields();
+            while (rs.next()) {
+                String seniorCitizenID = rs.getString("Senior Citizen ID");
+                if (seniorCitizenID.equals(seniorID)) {
+                    exist = true;
+                    break;
+                } else {
+                    exist = false;
+                }
             }
+            if (!exist) {
+                if (seniorID.isEmpty() || cboBrgy.getSelectedIndex() == -1 || cboStatus.getSelectedIndex() == -1
+                        || address.isEmpty() || birthPlace.isEmpty() || birthdate.isEmpty()
+                        || firstName.isEmpty() || lastName.isEmpty() || groupName.isEmpty()
+                        || groupArea.isEmpty() || gender == null || age.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "All fields are required",
+                            "Registration Error", JOptionPane.ERROR_MESSAGE);
+                } else if (Integer.parseInt(age) < MAX_AGE) {
+                    JOptionPane.showMessageDialog(null, "Entry is not eligible. Age must be atleast "
+                            + "60 years old.",
+                            "Registration Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    String brgy = cboBrgy.getSelectedItem().toString();
+                    String status = cboStatus.getSelectedItem().toString();
+                    databaseHelper.insertData("tblseniorrecords", seniorID, firstName,
+                            middleName, lastName, groupName, groupArea, brgy, address,
+                            birthdate, birthPlace, age, gender, status);
+                    databaseHelper.insertData("tblseniorrecordslogs", seniorID, currentDate, Login.login_user);
+                    JOptionPane.showMessageDialog(null, "New senior record has been successfully registered");
+                    clearFields();
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Senior Citizen ID already registered",
+                    "Registration Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        try {
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     "Registration Errors", JOptionPane.ERROR_MESSAGE);

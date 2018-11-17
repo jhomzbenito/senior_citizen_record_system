@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -54,6 +55,8 @@ public class DatabaseHelper {
 
         } catch (SQLException e) {
             System.out.print(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -65,19 +68,58 @@ public class DatabaseHelper {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
         }
         return rs;
     }
 
     public ResultSet getAllDataOf(String tableName, String columnName, String value) {
         try {
-            String sql = "SELECT * FROM " + tableName + " WHERE " + columnName + " = '" + value + "';";
+            String sql = "SELECT * FROM " + tableName + " WHERE " + columnName + " = ?";
             ps = conn.prepareStatement(sql);
+            ps.setString(1, value);
             rs = ps.executeQuery();
-            rsmd = rs.getMetaData();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return rs;
+    }
+
+    public ResultSet searchData(String tableName, String columnName, String searchValue) {
+        if (!searchValue.contains("'")) {
+            try {
+                String sql = "SELECT * FROM " + tableName + " WHERE `" + columnName + "` LIKE '" + searchValue + "%'";
+                ps = conn.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "Database Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return rs;
+    }
+
+    public ResultSet searchDataOf(String tableName, String whereColumn,
+            String whereArgs, String columnName, String searchValue) {
+        if (!searchValue.contains("'")) {
+            try {
+                String sql = "SELECT * FROM " + tableName + " WHERE `" + whereColumn
+                        + "` = ? AND `" + columnName + "` LIKE '" + searchValue + "%'";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, whereArgs);
+                rs = ps.executeQuery();
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "Database Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         return rs;
     }
@@ -92,6 +134,8 @@ public class DatabaseHelper {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -103,6 +147,60 @@ public class DatabaseHelper {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public String getCurrentDate() {
+        String currentDate = null;
+        try {
+            String sql = "SELECT DATE_FORMAT(CURRENT_DATE, '%m/%d/%Y') AS `Current Date`";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                currentDate = rs.getString("Current Date");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return currentDate;
+    }
+
+    public String getCurrentTimeStamp() {
+        String currentTimeStamp = null;
+        try {
+            String sql = "SELECT DATE_FORMAT(CURRENT_TIMESTAMP, '%m/%d/%Y %r') AS `Current Time Stamp`";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                currentTimeStamp = rs.getString("Current Time Stamp");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return currentTimeStamp;
+    }
+
+    public ResultSet customQuery(String query) {
+        try {
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return rs;
+    }
+
 }

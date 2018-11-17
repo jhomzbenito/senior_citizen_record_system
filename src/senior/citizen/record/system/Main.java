@@ -3,21 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package senior.citizen.record.system;
 
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import senior.citizen.record.system.account.Account;
 import senior.citizen.record.system.account.login.Login;
 import senior.citizen.record.system.account.register.Register;
+import senior.citizen.record.system.barangay_classify.Barangay;
 import senior.citizen.record.system.db.DatabaseHelper;
 import senior.citizen.record.system.db.SQLConnection;
+import senior.citizen.record.system.reports.Reports;
 
 /**
  *
  * @author Administrator
  */
 public class Main extends javax.swing.JFrame {
-    
+
     DatabaseHelper databaseHelper;
+    ResultSet rs;
 
     /**
      * Creates new form Main
@@ -25,6 +35,12 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         databaseHelper = new DatabaseHelper(SQLConnection.connectToDatabase());
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xsize = (int) tk.getScreenSize().getWidth();
+        int ysize = (int) tk.getScreenSize().getHeight();
+        this.setSize(xsize, ysize);
+        this.setLocationRelativeTo(null);
+        checkUser();
     }
 
     /**
@@ -37,63 +53,176 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton3 = new javax.swing.JButton();
-        btnRegister = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         btnPayment = new javax.swing.JButton();
         btnBarangay = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
         btnReports = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem_account_management = new javax.swing.JMenuItem();
+        jMenuItem_logout = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem_change_username = new javax.swing.JMenuItem();
+        jMenuItem_change_password = new javax.swing.JMenuItem();
 
         jButton3.setText("jButton3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
-        });
-
-        btnRegister.setText("Register");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
-        btnPayment.setText("Payment");
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        btnPayment.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalpayment.png")); // NOI18N
         btnPayment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPaymentActionPerformed(evt);
             }
         });
 
-        btnBarangay.setText("Barangay");
+        btnBarangay.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalbarangay.png")); // NOI18N
+        btnBarangay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBarangayActionPerformed(evt);
+            }
+        });
 
-        btnReports.setText("Reports");
+        btnRegister.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalregister.png")); // NOI18N
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+
+        btnReports.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalreports.png")); // NOI18N
+        btnReports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportsActionPerformed(evt);
+            }
+        });
+
+        btnExit.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\finalexit.png")); // NOI18N
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lalaine Ganda\\Desktop\\senior_citizen_record_system\\img\\mainbackground.png")); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(316, 316, 316)
+                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(116, 116, 116)
+                        .addComponent(btnBarangay, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(479, 479, 479)
+                        .addComponent(btnPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100)
+                        .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(286, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnBarangay, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(331, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(66, 66, 66))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(68, 68, 68)))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(btnPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))))
+        );
+
+        jMenu2.setText("File");
+
+        jMenuItem_account_management.setText("Account Management");
+        jMenuItem_account_management.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_account_managementActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem_account_management);
+
+        jMenuItem_logout.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem_logout.setText("Logout");
+        jMenuItem_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_logoutActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem_logout);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu1.setText("Account Settings");
+
+        jMenuItem_change_username.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem_change_username.setText("Change Username");
+        jMenuItem_change_username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_change_usernameActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem_change_username);
+
+        jMenuItem_change_password.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem_change_password.setText("Change Password");
+        jMenuItem_change_password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_change_passwordActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem_change_password);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBarangay, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBarangay, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(137, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -113,6 +242,126 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         databaseHelper.insertData("tblbarangay", "Ariendo");
     }//GEN-LAST:event_btnPaymentActionPerformed
+
+    private void btnBarangayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangayActionPerformed
+        // TODO add your handling code here:
+        new Barangay().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBarangayActionPerformed
+
+    private void btnReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportsActionPerformed
+        // TODO add your handling code here:
+        new Reports().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnReportsActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        new Login().setVisible(true);
+        this.dispose();
+        Login.login_user = null;
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void jMenuItem_change_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_change_usernameActionPerformed
+        // TODO add your handling code here:
+        String new_username = JOptionPane.showInputDialog("Enter your new username");
+        if (!new_username.isEmpty()) {
+            rs = databaseHelper.getAllData("tblaccount");
+            boolean match = false;
+            try {
+                while (rs.next()) {
+                    String username = rs.getString("Username");
+                    if (username.equals(new_username)) {
+                        match = true;
+                        JOptionPane.showMessageDialog(null, "Try a different username, that "
+                                + "is already taken");
+                        break;
+                    }
+                }
+                if (!match) {
+                    databaseHelper.updateData("tblaccount", "Username", new_username, "Username", Login.login_user);
+                    JOptionPane.showMessageDialog(null, "Username has been succesfully changed");
+                }
+            } catch (HeadlessException | SQLException e) {
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Username cannot be blank");
+        }
+    }//GEN-LAST:event_jMenuItem_change_usernameActionPerformed
+
+    private void jMenuItem_change_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_change_passwordActionPerformed
+        // TODO add your handling code here:
+        JTextField old_password = new JPasswordField();
+        JTextField new_password = new JPasswordField();
+        JTextField confirm_password = new JPasswordField();
+
+        Object[] message = {
+            "Old Password:", old_password,
+            "New Password:", new_password,
+            "Confirm Password:", confirm_password
+        };
+
+        int option = JOptionPane.showConfirmDialog(null, message, "Change Password", JOptionPane.OK_CANCEL_OPTION);
+        if (option == JOptionPane.OK_OPTION) {
+            rs = databaseHelper.getAllDataOf("tblaccount", "Username", Login.login_user);
+            try {
+                if (rs.next()) {
+                    String password = rs.getString("Password");
+                    if (old_password.getText().isEmpty()
+                            || new_password.getText().isEmpty()
+                            || confirm_password.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Please fill out all fields");
+                    } else if (!password.equals(old_password.getText())) {
+                        JOptionPane.showMessageDialog(null, "Incorrect Old Password");
+                    } else if (!new_password.getText().equals(confirm_password.getText())) {
+                        JOptionPane.showMessageDialog(null, "Password does not match");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Password successfully changed");
+                        databaseHelper.updateData("tblaccount", "Password", confirm_password.getText(),
+                                "Username", Login.login_user);
+                    }
+                }
+            } catch (HeadlessException | SQLException e) {
+            }
+        }
+    }//GEN-LAST:event_jMenuItem_change_passwordActionPerformed
+
+    private void jMenuItem_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_logoutActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Login().setVisible(true);
+    }//GEN-LAST:event_jMenuItem_logoutActionPerformed
+
+    private void jMenuItem_account_managementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_account_managementActionPerformed
+        // TODO add your handling code here:
+        new Account().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem_account_managementActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if (Login.login_user == null) {
+            this.dispose();
+            new Login().setVisible(true);
+        }
+        checkUser();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void checkUser() {
+        rs = databaseHelper.getAllDataOf("tblAccount", "Username", Login.login_user);
+        try {
+            if (rs.next()) {
+                String type = rs.getString("User Type");
+                if (type.equals("STAFF")) {
+                    jMenuItem_account_management.setVisible(false);
+                    btnPayment.setVisible(false);
+                    btnReports.setVisible(false);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -151,9 +400,19 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBarangay;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnPayment;
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnReports;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem_account_management;
+    private javax.swing.JMenuItem jMenuItem_change_password;
+    private javax.swing.JMenuItem jMenuItem_change_username;
+    private javax.swing.JMenuItem jMenuItem_logout;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
